@@ -14,6 +14,7 @@ import android.os.PowerManager;
 import android.util.Log;
 import android.view.WindowManager;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -46,10 +47,29 @@ public class DingDingUtil {
         List<String> packageNames = new ArrayList<>();
         for (int i = 0; i < packageInfos.size(); i++) {
             String packName = packageInfos.get(i).packageName;
+            Log.i(TAG, packName);
             packageNames.add(packName);
         }
         return packageNames.contains(packageName);
     }
+
+//    /**
+//     * 检查手机上是否安装了指定的软件
+//     *
+//     * @param packageName 应用包名
+//     */
+//    public static boolean isAppAvailable2(String packageName) {
+//        PackageManager packageManager = mContext.getPackageManager();
+//        //获取所有已安装程序的包信息
+//        List<AppUtils.AppInfo> appsInfo = AppUtils.getAppsInfo();
+//        List<String> packageNames = new ArrayList<>();
+//        for (int i = 0; i < appsInfo.size(); i++) {
+//            String packName = appsInfo.get(i).getPackageName();
+//            Log.i(TAG, packName);
+//            packageNames.add(packName);
+//        }
+//        return packageNames.contains(packageName);
+//    }
 
     /**
      * 打开指定包名的apk

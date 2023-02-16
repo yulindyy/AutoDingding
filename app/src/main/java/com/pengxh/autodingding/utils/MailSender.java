@@ -82,7 +82,7 @@ public class MailSender {
             mailMessage.setText(mailContent);
             // 发送邮件
             Transport.send(mailMessage);
-        } catch (MessagingException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

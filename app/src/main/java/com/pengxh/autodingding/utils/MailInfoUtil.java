@@ -20,10 +20,10 @@ public class MailInfoUtil {
         mailInfo.setMailServerHost("smtp.qq.com");//发送方邮箱服务器
         mailInfo.setMailServerPort("587");//发送方邮箱端口号
         mailInfo.setValidate(true);
-        mailInfo.setUserName("290677893@qq.com"); // 发送者邮箱地址
-        mailInfo.setPassword("xaabdfhhvqrfcajj");//邮箱授权码，不是密码
+        mailInfo.setUserName("872565979@qq.com"); // 发送者邮箱地址
+        mailInfo.setPassword("estaagecuqpkbfgg");//邮箱授权码，不是密码
         mailInfo.setToAddress(toAddress); // 接收者邮箱
-        mailInfo.setFromAddress("290677893@qq.com"); // 发送者邮箱
+        mailInfo.setFromAddress("872565979@qq.com"); // 发送者邮箱
         mailInfo.setSubject("自动打卡通知"); // 邮件主题
         if (emailMessage.equals("")) {
             mailInfo.setContent("未监听到打卡成功的通知，请手动登录检查" + TimeOrDateUtil.timestampToDate(System.currentTimeMillis())); // 邮件文本

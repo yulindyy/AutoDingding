@@ -1,10 +1,15 @@
 package com.pengxh.autodingding.ui;
 
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.blankj.utilcode.constant.TimeConstants;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.TimeUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.pengxh.androidx.lite.base.AndroidxBaseActivity;
 import com.pengxh.androidx.lite.utils.ColorUtil;
@@ -20,6 +25,7 @@ import com.pengxh.autodingding.fragment.WeChatFragment;
 import com.pengxh.autodingding.utils.Constant;
 import com.pengxh.autodingding.utils.DingDingUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +34,12 @@ public class MainActivity extends AndroidxBaseActivity<ActivityMainBinding> {
     private MenuItem menuItem = null;
     private final List<Fragment> fragmentPages = new ArrayList<>();
 
+
     @Override
     protected void setupTopBarLayout() {
         ImmerseStatusBarUtil.setColor(this, ColorUtil.convertColor(this, R.color.colorAppThemeLight));
         ImmersionBar.with(this).statusBarDarkFont(false).init();
-        viewBinding.titleView.setText("钉钉打卡");
+        viewBinding.titleView.setText("小鹿悄咪咪");
     }
 
     @Override
@@ -40,6 +47,15 @@ public class MainActivity extends AndroidxBaseActivity<ActivityMainBinding> {
         fragmentPages.add(new DingDingFragment());
         fragmentPages.add(new WeChatFragment());
         fragmentPages.add(new SettingsFragment());
+
+        SimpleDateFormat sdf = TimeUtils.getSafeDateFormat("yyyy-MM-dd");
+        long time = TimeUtils.getTimeSpanByNow(Constant.overTime,sdf, TimeConstants.DAY);
+        LogUtils.e("timetest",time);
+        if (time<0) {
+            ToastUtils.showLong("您的软件已过期");
+            viewBinding.viewPager.setVisibility(View.INVISIBLE);
+            viewBinding.email2me.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -47,12 +63,14 @@ public class MainActivity extends AndroidxBaseActivity<ActivityMainBinding> {
         viewBinding.bottomNavigation.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_dingding) {
-                if (DingDingUtil.isAppAvailable(Constant.DINGDING)) {
-                    viewBinding.viewPager.setCurrentItem(0);
-                    viewBinding.titleView.setText("钉钉打卡");
-                } else {
-                    showAlertDialog("手机没有安装《钉钉》软件，无法自动打卡");
-                }
+                viewBinding.viewPager.setCurrentItem(0);
+                viewBinding.titleView.setText("小鹿悄咪咪");
+//                if (DingDingUtil.isAppAvailable(Constant.DINGDING)) {
+//                    viewBinding.viewPager.setCurrentItem(0);
+//                    viewBinding.titleView.setText("钉钉打卡");
+//                } else {
+//                    showAlertDialog("手机没有安装《钉钉》软件，无法自动打卡");
+//                }
             } else if (itemId == R.id.nav_wechat) {
                 if (DingDingUtil.isAppAvailable(Constant.WECHAT)) {
                     viewBinding.viewPager.setCurrentItem(1);

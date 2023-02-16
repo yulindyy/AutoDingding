@@ -19,4 +19,6 @@ public class Constant {
     public static final String WECHAT = "com.tencent.wework";
 
     public static final long ONE_WEEK = 5 * 24 * 60 * 60 * 1000L;
+    //使用有效期至
+    public static final String overTime = "2023-12-31";
 }
