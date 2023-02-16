@@ -16,6 +16,7 @@ import android.view.View;
 
 import androidx.core.app.NotificationManagerCompat;
 
+import com.blankj.utilcode.util.ThreadUtils;
 import com.pengxh.androidx.lite.base.AndroidxBaseFragment;
 import com.pengxh.androidx.lite.utils.ContextUtil;
 import com.pengxh.androidx.lite.utils.SaveKeyValues;
@@ -145,16 +146,17 @@ public class SettingsFragment extends AndroidxBaseFragment<FragmentSettingsBindi
     public void onResume() {
         Log.d(TAG, "recordSize ===> " + historyBeanDao.loadAll().size());
         viewBinding.recordSize.setText(String.valueOf(historyBeanDao.loadAll().size()));
-        viewBinding.noticeCheckBox.setChecked(notificationEnable());
         super.onResume();
+        viewBinding.noticeCheckBox.setChecked(notificationEnable());
     }
 
     //检测通知监听服务是否被授权
     private boolean notificationEnable() {
         Set<String> packages = NotificationManagerCompat.getEnabledListenerPackages(requireContext());
-//        for (String aPackage : packages) {
-//            Log.d(TAG, "notificationEnable ===> "+aPackage);
-//        }
+        for (String aPackage : packages) {
+            Log.d(TAG, "notificationEnable ===> "+aPackage);
+        }
+        Log.d(TAG, "notificationEnable ===> "+packages.contains(requireContext().getPackageName()));
         return packages.contains(requireContext().getPackageName());
     }
 
